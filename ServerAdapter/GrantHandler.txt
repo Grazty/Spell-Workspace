@@ -1,0 +1,17 @@
+    [MessageHandler(typeof(SpellWorkspaceGrantRequest))]
+    private void ReceiveWorkspaceGrant(SpellWorkspaceGrantRequest request) {
+        try {
+            var wizard = GetActiveWizard();
+            if (wizard.CharId != request.CharacterId || wizard.IsInDuel) { Sender.Tell(new SpellWorkspaceGrantResult(false, "Choose this wizard outside combat.")); return; }
+            var spell = SpellFactory.GetSpell(request.TemplateId);
+            if (spell is null) { Sender.Tell(new SpellWorkspaceGrantResult(false, "Spell template is unavailable.")); return; }
+            if (request.Treasure) {
+                wizard.SpellbookBehavior.AddTreasureCard(request.TemplateId);
+                WizardData.Collections.WizardCollection.AddTreasureCard(wizard, request.TemplateId);
+            } else if (!wizard.SpellbookBehavior.LearnedSpellTemplateIds.Contains(request.TemplateId)) {
+                wizard.LearnSpell(spell);
+                SendToSocket(new WIZARD_12_PROTOCOL.MSG_ADDSPELLTOBOOK { SpellID = (int)request.TemplateId });
+            }
+            Sender.Tell(new SpellWorkspaceGrantResult(true, "Spell saved to the selected wizard."));
+        } catch (System.Exception exception) { Sender.Tell(new SpellWorkspaceGrantResult(false, exception.Message)); }
+    }

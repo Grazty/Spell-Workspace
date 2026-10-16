@@ -1,0 +1,42 @@
+{
+  "Platform": "Windows x64",
+  "Installers": [
+    {
+      "Id": "dotnet",
+      "Name": ".NET 10 SDK x64",
+      "File": "dotnet-sdk-10.0.402-win-x64.exe",
+      "Sha256": "930a215d2bcb3154c1898bd0fb9083a5a7755e8ccc26985309b144556557851a",
+      "Publisher": "CN=.NET, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+      "Source": "https://builds.dotnet.microsoft.com/dotnet/Sdk/10.0.402/dotnet-sdk-10.0.402-win-x64.exe",
+      "Arguments": [
+        "/install",
+        "/norestart"
+      ]
+    },
+    {
+      "Id": "git",
+      "Name": "Git for Windows x64",
+      "File": "Git-2.56.0.2-64-bit.exe",
+      "Sha256": "52188f917b378f00c70ec136bcf090005f30d44fbc4eba0bce759cc6592d60f6",
+      "Publisher": "CN=Johannes Schindelin, O=Johannes Schindelin, L=Bruehl, C=DE",
+      "Source": "https://github.com/git-for-windows/git/releases/download/v2.56.0.windows.2/Git-2.56.0.2-64-bit.exe",
+      "Arguments": [
+        "/NORESTART"
+      ]
+    },
+    {
+      "Id": "cpp",
+      "Name": "C++ Build Tools and Windows SDK",
+      "File": "vs_BuildTools.exe",
+      "Sha256": "2a6aa7d94e38d457a4eb3930fc60056ecab06865b2eb925e5275b8473a017583",
+      "Publisher": "CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US",
+      "Source": "https://aka.ms/vs/17/release/vs_BuildTools.exe",
+      "Arguments": [
+        "--wait",
+        "--add",
+        "Microsoft.VisualStudio.Workload.VCTools",
+        "--includeRecommended"
+      ]
+    }
+  ]
+}
